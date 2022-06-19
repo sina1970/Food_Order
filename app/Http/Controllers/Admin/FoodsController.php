@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\FoodRequest;
 use App\Http\Resources\FoodsResource;
-use Illuminate\Http\Request;
 use App\Models\Food;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use function response;
+use function tap;
 
 class FoodsController extends Controller
 {
@@ -48,7 +51,7 @@ class FoodsController extends Controller
             ]);
             return new FoodsResource($food);
         }catch (\Throwable $e){
-            return response()->json($e->getMessage());
+            throw new HttpException(500, $e->getMessage());
         }
     }
 
@@ -60,7 +63,14 @@ class FoodsController extends Controller
      */
     public function show($id)
     {
-        return new FoodsResource(Food::find($id));
+        try {
+            $food = Food::find($id);
+            if (!is_null($food)){
+                return new FoodsResource($food);
+            }
+        }catch (\Throwable $e){
+            throw new HttpException(500, $e->getCode());
+        }
     }
 
     /**
@@ -94,7 +104,7 @@ class FoodsController extends Controller
                 ])->first();
             return new FoodsResource($food);
         }catch (\Throwable $e){
-            return response()->json($e->getMessage());
+            throw new HttpException(500, $e->getMessage());
         }
     }
 
@@ -111,7 +121,7 @@ class FoodsController extends Controller
             $food->delete();
             return response()->json("food with id {$id} deleted");
         }catch (\Throwable $e){
-            return response()->json($e->getMessage());
+            throw new HttpException(500, $e->getMessage());
         }
 
     }

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('address_client', function (Blueprint $table) {
             $table->unsignedBigInteger('client_id');
             $table->unsignedInteger('address_id');
+            $table->timestamps();
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
         });

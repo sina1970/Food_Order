@@ -23,6 +23,7 @@ use App\Http\Controllers\LoginController;
 Route::post('client/login',[LoginController::class, 'clientLogin'])->name('clientLogin');
 Route::post('client/register',[LoginController::class, 'clientRegister'])->name('clientRegister');
 Route::post('client/addaddress',[AddressController::class,'addAddress']);
+Route::get('client/showaddress/{client_id}',[AddressController::class,'showClientAddresses']);
 
 Route::group( ['prefix' => 'client','middleware' => ['auth:client-api','scopes:client'] ],function(){
     // authenticated staff routes here

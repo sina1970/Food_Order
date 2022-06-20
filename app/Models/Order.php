@@ -9,7 +9,7 @@ class Order extends Model
 {
     use HasFactory;
     protected $table = 'orders';
-    protected $fillable = ['client_id','price','address','phone','verify'];
+    protected $fillable = ['client_id','price','address','phone','verify','cook_time'];
 
     public function foods(){
         return $this->belongsToMany(Food::class);

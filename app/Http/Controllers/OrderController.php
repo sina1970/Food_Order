@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Http\Resources\OrderResource;
@@ -39,7 +38,15 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        //
+        $request->validated();
+        $order = Order::create([
+            'client_id' => $request->client_id,
+            'price' => null,
+            'address' => null,
+            'phone' => $request->phone,
+            'verify' => 0,
+            'cook_time' => $request->cook_time
+        ]);
     }
 
     /**

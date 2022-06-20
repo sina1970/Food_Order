@@ -14,4 +14,8 @@ class Client extends Authenticatable
 //    protected $table = 'clients';
     protected $fillable = ['name','email','phone','password'];
     protected $hidden = ['password'];
+
+    public function addresses(){
+        return $this->belongsToMany(Address::class);
+    }
 }

@@ -35,7 +35,7 @@ Route::group( ['prefix' => 'client','middleware' => ['auth:client-api','scopes:c
 });
 
 //ADMIN
-//Route::post('user/register',[LoginController::class, 'userRegister'])->name('userRegister');
+
 
 Route::post('user/login',[LoginController::class, 'userLogin'])->name('userLogin');
 Route::group( ['prefix' => 'user','middleware' => ['auth:user-api','scopes:user'] ],function(){

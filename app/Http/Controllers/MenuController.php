@@ -11,8 +11,9 @@ class MenuController extends Controller
 {
     public function showMenu($id){
         try {
-            $category = Category::find($id);
-            return FoodsResource::collection($category->food);
+            $menu = Category::find($id);
+            if (!is_null($menu))
+                return FoodsResource::collection($menu->food);
         }catch (\Throwable $e){
             throw new HttpException(500, $e->getMessage());
         }

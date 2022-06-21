@@ -26,9 +26,10 @@ class StoreOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'client_id' => 'required|integer',
-            'phone' => 'required|string',
-            'verify' => 'required|integer'
+            'client_id' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'food_id' => 'required'
         ];
     }
 

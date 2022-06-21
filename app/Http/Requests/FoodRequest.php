@@ -15,7 +15,7 @@ class FoodRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class FoodRequest extends FormRequest
             'name' => 'required|min:3|max:20|string',
             'amount' => 'required|integer|min:2|max:100',
             'cook_time' => 'required|integer|min:20|max:60',
-            'price' => 'required|integer|min:50000:max:180000',
+            'price' => 'required|integer|min:50000|max:180000',
             'category_id' => 'required|integer'
         ];
     }

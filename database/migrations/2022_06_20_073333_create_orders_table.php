@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedBigInteger('client_id');
-            $table->integer('price')->nullable();
-            $table->string('address')->nullable();
+            $table->integer('price');
+            $table->string('address');
             $table->string('phone');
             $table->tinyInteger('verify');
-            $table->integer('cook_time')->nullable();
+            $table->integer('cook_time');
             $table->timestamps();
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
         });

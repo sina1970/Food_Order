@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('food_order', function (Blueprint $table) {
             $table->unsignedBigInteger('food_id');
             $table->unsignedInteger('order_id');
+            $table->string('food_name');
             $table->timestamps();
             $table->foreign('food_id')->references('id')->on('foods')->onDelete('cascade');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');

@@ -60,7 +60,8 @@ class CategoryController extends Controller
     {
         try {
             $category = Category::find($id);
-            return new CategoryResource($category);
+            if(!is_null($category))
+                return new CategoryResource($category);
         }catch (\Throwable $e){
             throw new HttpException(500, $e->getMessage());
         }

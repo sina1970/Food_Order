@@ -2,11 +2,11 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FoodsController;
-use App\Http\Controllers\MenuController;
-use App\Http\Controllers\AddressController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Client\AddressController;
+use App\Http\Controllers\Client\OrderController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MenuController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +24,8 @@ Route::post('client/login',[LoginController::class, 'clientLogin'])->name('clien
 Route::post('client/register',[LoginController::class, 'clientRegister'])->name('clientRegister');
 Route::post('client/addaddress',[AddressController::class,'addAddress']);
 Route::get('client/showaddress/{client_id}',[AddressController::class,'showClientAddresses']);
+Route::post('addorder',[OrderController::class,'store']);
+Route::apiResource('order',OrderController::class);
 
 Route::group( ['prefix' => 'client','middleware' => ['auth:client-api','scopes:client'] ],function(){
     // authenticated staff routes here
@@ -41,3 +43,7 @@ Route::group( ['prefix' => 'user','middleware' => ['auth:user-api','scopes:user'
     // authenticated staff routes here
     Route::get('dashboard',[LoginController::class, 'userDashboard']);
 });
+
+
+//test
+Route::post('test',[\App\Http\Controllers\TestController::class,'index']);

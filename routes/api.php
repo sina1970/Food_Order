@@ -6,6 +6,7 @@ use App\Http\Controllers\Client\AddressController;
 use App\Http\Controllers\Client\OrderController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\Admin\AdminOrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,7 +38,7 @@ Route::group( ['prefix' => 'client','middleware' => ['auth:client-api','scopes:c
 Route::apiResource('categories',CategoryController::class);
 Route::apiResource('foods',FoodsController::class);
 Route::get('menu/{category_id}',[MenuController::class,'showMenu']);
-
+Route::apiResource('orders',AdminOrderController::class);
 Route::post('user/login',[LoginController::class, 'userLogin'])->name('userLogin');
 Route::group( ['prefix' => 'user','middleware' => ['auth:user-api','scopes:user'] ],function(){
     // authenticated staff routes here

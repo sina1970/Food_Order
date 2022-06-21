@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 class AdminOrderController extends Controller
@@ -16,7 +17,7 @@ class AdminOrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::paginate(10);
         return OrderResource::collection($orders);
     }
 
@@ -72,7 +73,9 @@ class AdminOrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $order = Order::find($id);
+        $order->verify = $request->verify;
+        return new OrderResource($order);
     }
 
     /**

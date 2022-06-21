@@ -57,12 +57,7 @@ class OrderController extends Controller
                 'cook_time' => $cook_time
             ]);
             OrderHandler::SaveFoodOrder($request->food_id, $order->id);
-//            return OrderHandler::SaveFoodOrder($request->food_id, $order->id);
             $food_names= OrderHandler::SpecificOrder($order->id);
-
-//            array_push($order,["foods"=>$food_names]);
-//            $modelData = OrderHandler::SpecificOrder($order->id);
-//            dd();
             return new OrderResource(new OrderConvertor($order, $food_names));
         }catch (\Throwable $e){
 //            throw new HttpException(500, $e->getMessage());

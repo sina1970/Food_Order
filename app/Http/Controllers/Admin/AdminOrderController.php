@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
+use App\OrderRepository\OrderConvertor;
+use App\OrderRepository\OrderHandler;
 use http\Env\Response;
 use Illuminate\Http\Request;
 
@@ -50,7 +52,9 @@ class AdminOrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $order = Order::find($id);
+        $foods_name=OrderHandler::SpecificOrder($order->id);
+        return new OrderResource(new OrderConvertor($order, $foods_name));
     }
 
     /**

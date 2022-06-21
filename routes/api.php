@@ -33,10 +33,10 @@ Route::group( ['prefix' => 'client','middleware' => ['auth:client-api','scopes:c
     Route::apiResource('order',OrderController::class);
 
 });
-
+Route::get('menu/{category_id}',[MenuController::class,'showMenu']);
 //ADMIN
 
-Route::get('menu/{category_id}',[MenuController::class,'showMenu']);
+
 Route::post('user/login',[LoginController::class, 'userLogin'])->name('userLogin');
 Route::group( ['prefix' => 'user','middleware' => ['auth:user-api','scopes:user'] ],function(){
     // authenticated staff routes here
@@ -49,4 +49,3 @@ Route::group( ['prefix' => 'user','middleware' => ['auth:user-api','scopes:user'
 
 
 //test
-Route::post('test',[\App\Http\Controllers\TestController::class,'index']);
